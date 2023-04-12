@@ -1,9 +1,18 @@
 <nav>
-    <ul>
-      <li><a routerLink="/user">Usuario</a></li>
-      <li><a routerLink="/account-status">Estado de Cuenta</a></li>
-      <li><a routerLink="/announcements">Comunicados</a></li>
-      <li><a routerLink="/login" (click)="onClick()">Logout</a></li>
-    </ul>
-  </nav>
-  
+  <ul>
+    <li><a routerLink="/user" (click)="goUser()">Usuario</a></li>
+    <li><a routerLink="/account-status" (click)="goAccountStatus()">Estado de Cuenta</a></li>
+    <li><a routerLink="/announcements" (click)="goAnnouncements()">Comunicados</a></li>
+  </ul>
+</nav>
+<a routerLink="/login" (click)="onClick()">Logout</a>
+
+
+<!-- <nav>
+  <ul>
+    <li><a routerLink="/user" (click)="goUser()">Usuario</a></li>
+    <li><a routerLink="/account-status" (click)="goAccountStatus()">Estado de Cuenta</a></li>
+    <li><a routerLink="/announcements" (click)="goAnnouncements()">Comunicados</a></li>
+    <li><a routerLink="/login" (click)="onClick()">Logout</a></li>
+  </ul>
+</nav> -->

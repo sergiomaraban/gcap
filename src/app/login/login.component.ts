@@ -15,16 +15,20 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
     this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', Validators.required)
+      email: new FormControl('review your email', [Validators.required, Validators.email]),
+      password: new FormControl('review your pwd', Validators.required)
     });
   }
 
   onSubmit() {
     const email = this.loginForm.value.email;
     const password = this.loginForm.value.password;
-    var res = this.authService.login(email, password);
-    console.log(res);
-    this.router.navigate(['/dashboard']);
-  }
+    this.authService.login(email, password)
+      .then(() => {        
+        this.router.navigate(['/dashboard']);        
+      })
+      .catch(error => {        
+        console.error(error);
+      });
+  }  
 }

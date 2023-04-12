@@ -5,22 +5,23 @@ import { AngularFireAuthModule } from '@angular/fire/compat/auth';
 import { environment } from './environments/environment';
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
-import { DashboardComponent } from './dashboard/dashboard.component';
 import { AppRoutingModule } from './app-routing.module';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { RouterModule } from '@angular/router'; 
 import { UserComponent } from './user/user.component';
 import { AccountStatusComponent } from './account-status/account-status.component';
 import { AnnouncementsComponent } from './announcements/announcements.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { AuthGuard } from './services/auth.guard';
+
 
 @NgModule({
   declarations: [
     AppComponent,    
-    LoginComponent, 
-    DashboardComponent, 
+    LoginComponent,     
     UserComponent, 
     AccountStatusComponent, 
-    AnnouncementsComponent    
+    AnnouncementsComponent
   ],
   imports: [
     BrowserModule,  
@@ -30,14 +31,14 @@ import { AnnouncementsComponent } from './announcements/announcements.component'
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule,
     RouterModule.forRoot([      
-      { path: 'login', component: LoginComponent },
-      { path: 'dashboard', component: DashboardComponent},
-      { path: 'user', component: UserComponent},
-      { path: 'account-status', component: AccountStatusComponent},
-      { path: 'announcements', component: AnnouncementsComponent},
+       { path: 'login', component: LoginComponent },      
+       { path: 'user', component: UserComponent, canActivate: [AuthGuard]},
+       { path: 'account-status', component: AccountStatusComponent, canActivate: [AuthGuard]},
+       { path: 'announcements', component: AnnouncementsComponent, canActivate: [AuthGuard]},
+       { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard] },      
     ])     
   ],
-  providers: [],
+  providers: [AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
